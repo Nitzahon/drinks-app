@@ -1,52 +1,70 @@
 <template>
   <div v-theme:column="'narrow'" id="show-blogs">
-   <h1>All Blog Articles</h1>
-   <input type="text" v-model="search" placeholder="search blogs"/>
+    <h1>All Blog Articles</h1>
+    <input type="text" v-model="search" placeholder="search blogs" />
     <div v-for="blog in filteredBlogs" class="single-blog" :key="blog.id">
-        <h2 v-rainbow>{{blog.title | to-uppercase}}</h2>
-        <article>{{blog.body | snippet}}</article>
+      <h2 v-rainbow>{{ blog.title | toUppercase }}</h2>
+      <article>{{ blog.body | snippet }}</article>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
-
-  data () {
+  data() {
     return {
-      blogs:[],
-      search:''
-    }
+      blogs: [],
+      search: "",
+    };
   },
-  methods:{
-
+  methods: {},
+  created() {
+    this.$http
+      .get("https://jsonplaceholder.typicode.com/posts")
+      .then(function (data) {
+        console.log(data);
+        this.blogs = data.body.slice(0, 10);
+      });
   },
-  created(){
-      this.$http.get('https://jsonplaceholder.typicode.com/posts').then(function(data){
-          console.log(data);
-          this.blogs=data.body.slice(0,10);
-      })
+  computed: {
+    filteredBlogs: function () {
+      return this.blogs.filter((blog) => {
+        return blog.title.match(this.search);
+      });
+    },
   },
-  computed:{
-      filteredBlogs: function(){
-          return this.blogs.filter((blog)=>{
-              return blog.title.match(this.search);
-          });
-      }
-  }
-}
+  filters: {
+    toUppercase(value) {
+      return value.toUpperCase();
+    },
+  },
+  directives: {
+    rainbow: {
+      bind(el, binding, vnode) {
+        let randomColor = Math.floor(Math.random() * 0x1000000); // integer between 0x0 and 0xFFFFFF
+        randomColor = randomColor.toString(16); // convert to hex
+        randomColor = ("000000" + randomColor).slice(-6); // pad with leading zeros
+        let backColor = parseInt(randomColor, 16);
+        backColor = 0xFFFFFF ^ backColor;
+        backColor = backColor.toString(16); // convert to hex
+        backColor = ("000000" + backColor).slice(-6); // pad with leading zeros
+        el.style.color = "#" + randomColor; // prepend #
+        el.style.background="#" + backColor;
+      },
+    },
+  },
+};
 </script>
 
 <style>
-#show-blogs{
-    max-width: 800px;
-    margin:0 auto;
+#show-blogs {
+  max-width: 800px;
+  margin: 0 auto;
 }
-.single-blog{
-    padding:20px;
-    margin:20px 0;
-    box-sizing: border-box;
-    background: #eee;
+.single-blog {
+  padding: 20px;
+  margin: 20px 0;
+  box-sizing: border-box;
+  background: #eee;
 }
 </style>

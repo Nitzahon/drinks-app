@@ -4,11 +4,11 @@ import VueResource from 'vue-resource'
 Vue.use(VueResource);
 
 //Custom directives
-Vue.directive('rainbow',{
-  bind(el, binding, vnode){
-    el.style.color = "#"+[...Array(6)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
-  }
-});
+// Vue.directive('rainbow',{
+//   bind(el, binding, vnode){
+//     el.style.color = "#"+[...Array(6)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+//   }
+// });
 Vue.directive('theme',{
   bind(el, binding, vnode){
     if(binding.value=='wide'){
@@ -24,9 +24,9 @@ Vue.directive('theme',{
 });
 
 //Filters
-Vue.filter('to-uppercase', function(value){
-  return value.toUpperCase();
-});
+// Vue.filter('to-uppercase', function(value){
+//   return value.toUpperCase();
+// });
 Vue.filter('snippet', function(value){
   return value.slice(0,100)+"...";
 });
