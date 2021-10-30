@@ -1,7 +1,7 @@
 <template>
   <div id="single-blog">
-    <h1>{{blog.title}}</h1>
-    <article>{{blog.body}}</article>
+    <!-- <h1>{{blog.title}}</h1>
+    <article>{{blog.body}}</article> -->
   </div>
 </template>
 
@@ -14,14 +14,14 @@ export default {
     };
   },
   created(){
-      this.$http.get('https://jsonplaceholder.typicode.com/posts/'+this.id).then((data)=>{
-          this.blog = data.body;
-      })
+      // this.$http.get('https://jsonplaceholder.typicode.com/posts/'+this.id).then((data)=>{
+      //     this.blog = data.body;
+      // })
   }
 };
 </script>
 
-<style>
+<style scoped>
 #single-blog{
     max-width: 960px;
     margin:0 auto;
