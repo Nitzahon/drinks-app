@@ -2,16 +2,20 @@
   <tabs>
 
  <tab name="Ingredients" :selected="true">
-      <h1>What we do{{this.details}}</h1>
+      <h1>Ingredients:{{this.details}}</h1>
       <!-- <div v-for="ingerdient in ingredients" :key="ingerdient">
         {{ingerdient}}
       </div> -->
     </tab>
-    <tab name="Pricing">
-      <h1>How much we do it for</h1>
+    <tab name="Directions">
+      <h1>Directions:</h1>
+       <span>{{this.details.str.strInstructions}}</span>
     </tab>
-    <tab name="About Us">
-      <h1>Why we     {{this.details}} do it</h1>
+    <tab name="Measures">
+      <h1>Measures:</h1>
+            <!-- <div v-for="measure in measures" :key="measure">
+        {{measure}}
+      </div> -->
     </tab>
   </tabs>
 </template>
@@ -33,7 +37,16 @@ export default {
         }
       }
       return ingredientList;
-    }
+    },
+    measures:function(){
+      let messureList=[];
+      for(let key in details){
+        if(key.toUpperCase().match("strMeasure")){
+          messureList.push(details[key])
+        }
+      }
+      return messureList;
+    },
   }
   // methods: {
   //   goDetailDrink: function () {

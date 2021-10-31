@@ -7,14 +7,14 @@
 
 <script>
 // import addBlog from "./components/addBlog.vue";
-import AllDrinks from "./components/singleBlog.vue";
+// import AllDrinks from "./components/AllDrinks.vue";
 // import listBlogs from "./components/listBlogs.vue";
 import header from "./components/header.vue";
 
 export default {
   components: {
     // "add-blog": addBlog,
-    "all-drinks-blogs": AllDrinks,
+    // "all-drinks-blogs": AllDrinks,
     // "list-blogs": listBlogs,
     "app-header": header,
   },
